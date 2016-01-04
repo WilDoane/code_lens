@@ -10,4 +10,5 @@ code_lens is designed to reduce the extrinsic cognitive load associated with loo
 1. Open index.html in your browser.
 2. Paste source code into the text area.
 3. Review your code using any of the available lenses: parentheses, braces, brackets, comments, end of line characters, etc.
-
+4. Tweak your source code to test changes.
+5. Copy and paste your source code back into your preferred text editor.
