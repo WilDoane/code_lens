@@ -1,0 +1,141 @@
+<html>
+<head>
+  <style>
+  div, textarea {
+    font-family: courier;
+    white-space: pre-wrap;
+  }
+  div {
+    color: #cccccc;
+  }
+  td {
+    vertical-align: top;
+  }
+  .important {
+    color: #ffffff;
+    background-color: #000000;
+    font-weight: bold;
+  }
+  </style>
+  <script>
+  
+  var lenses = {
+      "parens": /[)(]/g,
+      "brackets": /[\]\[]/g,
+      "braces": /[}{]/g,
+      "html_tags": /&lt;.*?&gt;/g, // any < > in the source would have been converted to html entities
+      "qstring": /\'.*?\'/g,
+      "qqstring": /\".*?\"/g,
+      //"paired": /[}{)(\]\[]/g,
+      "comment": /\/\/.*/g,
+      "eol": /;[\s]*[\r\n]+/g,
+      "math_ops": /( \-\d| \+ | \- | \/ | \* |\+\+|\-\-)/g,
+      "assignment": / (=|\+=|\-=|\*=|\/=) /g,
+      "comparison": / (==|!=|===|!==|&lt;|&gt;|&lt;=|&gt;=) /g,
+      "logic": /(!| && | \|\| )/g,
+  }
+  
+  
+  function process() {
+    var source_el = document.getElementById("source");
+    var source = source_el.value;
+
+    source = source.replace( /</g , "&lt;");
+    source = source.replace( />/g, "&gt;");
+    
+    for(key_idx in Object.keys(lenses)) {
+      var key = Object.keys(lenses)[key_idx];
+      el = document.getElementById(key);
+      result = source.replace( lenses[key], "<span class='important'>$&</span>");
+      //result = result.replace( /~</g , "&lt;");
+      //result = result.replace( />~/g, "&gt;");
+      el.innerHTML = result;
+    }
+
+  }
+  
+  function setupLenses() {
+    for(var key_idx in Object.keys(lenses)) {
+      var key = Object.keys(lenses)[key_idx];
+    
+      var div = document.createElement("div");
+      div.id = key;
+      document.getElementById("lens_panel").appendChild(div);
+    
+      var span = document.createElement("span");
+      span.id = key + "_nav";
+      span.class = key;
+      span.onclick = switchLens;
+      span.innerHTML = key + " | ";
+      document.getElementById("nav_panel").appendChild(span);
+    }
+  }
+  
+  function hideLenses() {
+    for(key_idx in Object.keys(lenses)) {
+      var key = Object.keys(lenses)[key_idx];
+      document.getElementById(key).style.display = "none";
+      document.getElementById(key + "_nav").style.backgroundColor = "#ffffff";
+    }
+  }
+  
+  function switchLens(target){
+    hideLenses();
+    document.getElementById(target.srcElement.class).style.display = "block";
+    document.getElementById(target.srcElement.class + "_nav").style.backgroundColor = "#aaaaff";
+
+  }
+  </script>
+</head>
+<body>
+  <table>
+    <tr>
+      <td></td>
+      <td id="nav_panel"></tr>
+    <tr>
+      <td>
+        <form>
+          <textarea id="source" cols=80 rows=50>   function process() {
+    var source_el = document.getElementById("source");
+    var source = source_el.value;
+
+    source = source.replace( /</g , "&lt;");
+    source = source.replace( />/g, "&gt;");
+    
+    for(key_idx in Object.keys(lenses)) {
+      var key = Object.keys(lenses)[key_idx];
+      el = document.getElementById(key);
+      result = source.replace( lenses[key], "<span class='important'>$&</span>");
+      //result = result.replace( /~</g , "&lt;");
+      //result = result.replace( />~/g, "&gt;");
+      el.innerHTML = result;
+    }
+
+  }
+
+if (x <= 4) 
+
+x || 3
+3 && 2
+(!x < 10 && y > 1)
+(x < 10 || y == 1) </textarea>
+        </form>
+      </td>
+      <td id="lens_panel">
+        <div id="instructions" z-index=-1>Paste or type code into the text area to the left. Then, click one of the lens options, above.
+        </div>
+      </td>
+    </tr>
+  </table>
+  <script>
+  setupLenses();
+  hideLenses();
+  
+  document.getElementById("source").onkeyup = process;
+  process();
+  document.getElementById("parens_nav").click();
+  
+  //switchTab("instructions");
+  </script>
+</body>
+</html>
