@@ -33,10 +33,12 @@
       "assignment": / (=|\+=|\-=|\*=|\/=) /g,
       "comparison": / (==|!=|===|!==|&lt;|&gt;|&lt;=|&gt;=) /g,
       "logic": /(!| && | \|\| )/g,
+      "unique_symbols": symbols
   }
   
   
   function process() {
+    var result;
     var source_el = document.getElementById("source");
     var source = source_el.value;
 
@@ -46,11 +48,20 @@
     for(key_idx in Object.keys(lenses)) {
       var key = Object.keys(lenses)[key_idx];
       el = document.getElementById(key);
-      result = source.replace( lenses[key], "<span class='important'>$&</span>");
-      //result = result.replace( /~</g , "&lt;");
-      //result = result.replace( />~/g, "&gt;");
+      
+      if(lenses[key] instanceof RegExp) {
+        result = source.replace( lenses[key], "<span class='important'>$&</span>");
+        //result = result.replace( /~</g , "&lt;");
+        //result = result.replace( />~/g, "&gt;");
+      } else if(typeof lenses[key] === "function") {
+        result = lenses[key]();
+      }
+      
+      
       el.innerHTML = result;
     }
+    
+    symbols();
 
   }
   
@@ -85,6 +96,16 @@
     document.getElementById(target.srcElement.class + "_nav").style.backgroundColor = "#aaaaff";
 
   }
+  
+  function onlyUnique(value, index, self) { 
+      return self.indexOf(value.trim()) === index;
+  }
+  
+  function symbols() {
+    var symbols = document.getElementById("source").value.split(/[ ;:=,<>\(\){}+=\-\|&$#"'\[\]\/!*]+/).filter( onlyUnique ).sort().join("<br>");
+    return symbols;
+  }
+  
   </script>
 </head>
 <body>
