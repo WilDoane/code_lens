@@ -110,6 +110,7 @@
   
   function symbols() {
     var symbols = document.getElementById("source").value.split(/[ ;:=,<>\(\){}+=\-\|&$#"'\[\]\/!*\r\n~]+/).filter( onlyUnique ).sort().join("<br>");
+    symbols = "<span style='color: black;'>" + symbols + "</span>";
     return symbols;
   }
   
