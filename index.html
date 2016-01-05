@@ -102,7 +102,7 @@
   }
   
   function symbols() {
-    var symbols = document.getElementById("source").value.split(/[ ;:=,<>\(\){}+=\-\|&$#"'\[\]\/!*]+/).filter( onlyUnique ).sort().join("<br>");
+    var symbols = document.getElementById("source").value.split(/[ ;:=,<>\(\){}+=\-\|&$#"'\[\]\/!*\r\n]+/).filter( onlyUnique ).sort().join("<br>");
     return symbols;
   }
   
