@@ -25,21 +25,21 @@
   <script>
   
   var lenses = {
-      "parens":         [ /[)(]/g, "Parentheses usually need to be paired () and are used following the names of functions, conditionals, and loops and to make the order of mathematical and logical operations explicit"],
-      "brackets":       [ /[\]\[]/g, "Brackets usually need to be paired [] and are used to access elements in an array"],
-      "braces":         [ /[}{]/g, "Braces usually need to be paired {} and are used (1) to surround lines of code that should be executed together (also known as code blocks) and (2) to define JavaScript objects (also known as JSON)"],
+      "Parentheses":         [ /[)(]/g, "Parentheses usually need to be paired () and are used following the names of functions, conditionals, and loops and to make the order of mathematical and logical operations explicit"],
+      "Brackets":       [ /[\]\[]/g, "Brackets usually need to be paired [] and are used to access elements in an array"],
+      "Curly braces":         [ /[}{]/g, "Braces usually need to be paired {} and are used (1) to surround lines of code that should be executed together (also known as code blocks) and (2) to define JavaScript objects (also known as JSON)"],
       // any < > in the source would have been converted to html entities
-      "html_tags":      [ /&lt;.*?&gt;/g, "Opening and closing HTML tags usually need to be paired &lt;tag&gt;...&lt;/tag&gt;"], 
-      "qstring":        [ /\'.*?\'/g, "Single-quoted (apostrophe: ') strings"],
-      "qqstring":       [ /\".*?\"/g, "Double-quoted (quotation mark: \") strings"],
+      "HTML tags":      [ /&lt;.*?&gt;/g, "Opening and closing HTML tags usually need to be paired &lt;tag&gt;...&lt;/tag&gt;"], 
+      "Single-quoted string":        [ /\'.*?\'/g, "Single-quoted (apostrophe: ') strings"],
+      "Double-quoted string":       [ /\".*?\"/g, "Double-quoted (quotation mark: \") strings"],
       //"paired":       [ /[}{)(\]\[]/g, ""],
-      "comment":        [ /\/\/.*/g, "Single line comments should explain why lines or blocks of code exist rather than simply restating what they're doing (e.g., 'multiplier for the sales tax rate' rather than 'set x to 1.05')"],
-      "eol":            [ /;[\s]*[\r\n]+/g, "Expressions should usually end with a semicolon;"],
-      "math_ops":       [ /( \-\d| \+ | \- | \/ | \* |\+\+|\-\-)/g, "Mathematical operators that take two arguments (e.g., a + b) should have a space on either side of the operator"],
-      "assignment":     [ / (=|\+=|\-=|\*=|\/=) /g, "Assignment of values to variables (e.g., x = 5) should have a space on either side of the assignment operator"],
-      "comparison":     [ / (==|!=|===|!==|&lt;|&gt;|&lt;=|&gt;=) /g, "Tests of equality (==, !=), inequality(&lt;, &gt;, &lt;=, &gt;=), and identity(===, !==) should have a space on either side of the operator"],
-      "logic":          [ /(!| && | \|\| )/g, "Boolean AND (&&) and OR (||) should have a space on either side of the operator (e.g., a && b)"],
-      "unique_symbols": [ symbols, "Check for subtle typos, such as getElementById vs. getElementbyId or innerHTML vs. innerHMTL" ]
+      "Single line comment":        [ /\/\/.*/g, "Single line comments should explain why lines or blocks of code exist rather than simply restating what they're doing (e.g., 'multiplier for the sales tax rate' rather than 'set x to 1.05')"],
+      "End Of Line (EOL)":            [ /;[\s]*[\r\n]+/g, "Expressions should usually end with a semicolon;"],
+      "Math operators":       [ /( \-\d| \+ | \- | \/ | \* |\+\+|\-\-)/g, "Mathematical operators that take two arguments (e.g., a + b) should have a space on either side of the operator"],
+      "Assignment operators":     [ / (=|\+=|\-=|\*=|\/=) /g, "Assignment of values to variables (e.g., x = 5) should have a space on either side of the assignment operator"],
+      "Comparison operators":     [ / (==|!=|===|!==|&lt;|&gt;|&lt;=|&gt;=) /g, "Tests of equality (==, !=), inequality(&lt;, &gt;, &lt;=, &gt;=), and identity(===, !==) should have a space on either side of the operator"],
+      "Logical operators":          [ /(!| && | \|\| )/g, "Boolean AND (&&) and OR (||) should have a space on either side of the operator (e.g., a && b)"],
+      "Unique Symbols": [ symbols, "Check for subtle typos, such as getElementById vs. getElementbyId or innerHTML vs. innerHMTL" ]
   }
   
   
@@ -161,7 +161,7 @@ x || 3
   
   document.getElementById("source").onkeyup = process;
   process();
-  document.getElementById("parens_nav").click();
+  document.getElementById(Object.keys(lenses)[0] + "_nav").click();
   
   //switchTab("instructions");
   </script>
