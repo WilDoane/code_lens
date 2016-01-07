@@ -3,10 +3,10 @@
   <style>
   div, textarea {
     font-family: courier;
+    font-size: 90%;
     white-space: pre-wrap;
-  }
-  div {
-    color: #cccccc;
+    padding: 5px;
+    margin: 5px;
   }
   td {
     vertical-align: top;
@@ -16,10 +16,9 @@
     background-color: #000000;
     font-weight: bold;
   }
-  #instructions {
+  div#instructions {
+    color: #ffffff;
     background-color: #222222;
-    padding: 5px;
-    margin: 5px;
   }
   </style>
   <script>
@@ -32,7 +31,7 @@
       "HTML tags":            [ /&lt;.*?&gt;/g, "Opening and closing HTML tags usually need to be paired &lt;tag&gt;...&lt;/tag&gt;"], 
       "Single-quoted string": [ /\'.*?\'/g, "Single-quoted (apostrophe: ') strings"],
       "Double-quoted string": [ /\".*?\"/g, "Double-quoted (quotation mark: \") strings"],
-      //"paired":       [ /[}{)(\]\[]/g, ""],
+      //"paired":             [ /[}{)(\]\[]/g, ""],
       "Single line comment":  [ /\/\/.*/g, "Single line comments should explain why lines or blocks of code exist rather than simply restating what they're doing (e.g., 'multiplier for the sales tax rate' rather than 'set x to 1.05')"],
       "End Of Line (EOL)":    [ /;[\s]*[\r\n]+/g, "Expressions should usually end with a semicolon;"],
       "Math operators":       [ /( \-\d| \+ | \- | \/ | \* |\+\+|\-\-)/g, "Mathematical operators that take two arguments (e.g., a + b) should have a space on either side of the operator"],
@@ -68,6 +67,8 @@
       
       el.innerHTML = result;
     }
+    
+    setColors();
   }
   
   function setupLenses() {
@@ -78,6 +79,7 @@
     
       var div = document.createElement("div");
       div.id = key;
+      div.className = "lens";
       document.getElementById("lens_panel").appendChild(div);
       
       var opt = document.createElement("option");
@@ -91,6 +93,27 @@
       
       
       
+    }
+  }
+  
+  function setColors() {
+    var emphasis_fg = document.getElementById("emphasis_fg").value;
+    var emphasis_bg = document.getElementById("emphasis_bg").value;
+    var deemphasis_fg = document.getElementById("deemphasis_fg").value;
+    var deemphasis_bg = document.getElementById("deemphasis_bg").value;
+    
+    var lenses = document.getElementsByClassName("lens");
+    
+    for(var i = 0; i < lenses.length; i++) {
+      lenses[i].style.color = deemphasis_fg;
+      lenses[i].style.backgroundColor = deemphasis_bg;
+    }
+    
+    var highlights = document.getElementsByClassName("important");
+    
+    for(var i = 0; i < highlights.length; i++) {
+      highlights[i].style.color = emphasis_fg;
+      highlights[i].style.backgroundColor = emphasis_bg;
     }
   }
   
@@ -134,11 +157,21 @@
   
   </script>
 </head>
+
+
+
 <body>
   <table>
     <tr>
       <td>Paste or type code into the text area, below. Then, click one of the lens options at the right.</td>
-      <td id="nav_panel"><select id="nav_menu"></select></tr>
+      <td id="nav_panel">
+        <select id="nav_menu"></select> 
+        Deemphasis: <input type="text" id="deemphasis_fg" value = "#999999" size = 8 title = "Deemphasis foreground color" placeholder = "foreground"> 
+                    <input type="text" id="deemphasis_bg" value = "#ffffff" size = 8 title = "Deemphasis background color" placeholder = "background">
+        Emphasis: <input type="text" id="emphasis_fg" value="#ffffff" size = 8 title = "Emphasis foreground color"         placeholder = "foreground"> 
+                  <input type="text" id="emphasis_bg" value="#000000" size = 8 title = "Emphasis background color"         placeholder = "background">
+      <div id="instructions"></div>
+    </tr>
     <tr>
       <td>
         <form>
@@ -169,7 +202,6 @@ x || 3
         </form>
       </td>
       <td id="lens_panel">
-        <div id="instructions"></div>
       </td>
     </tr>
   </table>
@@ -177,8 +209,14 @@ x || 3
   setupLenses();
   hideLenses();
   
+  document.getElementById("deemphasis_fg").onkeyup = setColors;
+  document.getElementById("deemphasis_bg").onkeyup = setColors;
+  document.getElementById("emphasis_fg").onkeyup = setColors;
+  document.getElementById("emphasis_bg").onkeyup = setColors;
+
   document.getElementById("source").onkeyup = process;
   process();
+  
   
   document.getElementById("nav_menu").onchange = switchLens;
   fireEvent(document.getElementById("nav_menu"), "change");
