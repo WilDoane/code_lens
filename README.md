@@ -7,7 +7,7 @@ Programmers--especially novices--struggle with syntax and style issues where oft
 code_lens is designed to reduce the extraneous cognitive load associated with looking at your source code in order to draw your attention to sources of frequent errors. All characters other than those of immediate interest are greyed out.
 
 # To use
-1. Download this repository and, if necessary, unzip it.
+1. [Download this repository](https://github.com/WilDoane/code_lens/archive/master.zip) and, if necessary, unzip it.
 2. Open index.html in your browser.
 3. Paste source code into the text area.
 4. Review your code using any of the available lenses: parentheses, braces, brackets, comments, end of line characters, etc.
