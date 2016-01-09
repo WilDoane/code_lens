@@ -32,7 +32,7 @@
       "Single-quoted string": [ /\'.*?\'/g, "Single-quoted (apostrophe: ') strings."],
       "Double-quoted string": [ /\".*?\"/g, "Double-quoted (quotation mark: \") strings."],
       //"paired":             [ /[}{)(\]\[]/g, ""],
-      "Single line comment":  [ /\/\/.*/g, "Single line comments should explain why lines or blocks of code exist rather than simply restating what they're doing (e.g., 'multiplier for the sales tax rate' rather than 'set x to 1.05'). They can be used "],
+      "Single line comment":  [ /\/\/.*/g, "Single line comments should explain why lines or blocks of code exist rather than simply restating what they're doing (e.g., 'multiplier for the sales tax rate' rather than 'set x to 1.05'). They can be used to temporarily disable ('comment out') lines of code during debugging."],
       "Multiline comment":    [ /\/\*[\s\S]*?\*\//g, "Multiline comments should explain why lines or blocks of code exist rather than simply restating what they're doing. They are often used (1) to provide more explaination than can fit in a single line comment or (2) to temporarily disable ('comment out') lines of code during debugging."],
       "console.log()":        [ /console\.log[\s]*\(.*\)/g, "console.log() can be used to send text or values of variables to the browser's developer's console for debugging." ],
       "End Of Line (EOL)":    [ /;[\s]*[\r\n]+/g, "Expressions should usually end with a semicolon;"],
