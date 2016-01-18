@@ -177,30 +177,51 @@
     <tr>
       <td>
         <form>
-          <textarea id="source" cols=80 rows=50>   function process() {
-    var source_el = document.getElementById("source");
-    var source = source_el.value;
+          <textarea id="source" cols=80 rows=50>/******************************************************
+ Factorial: A mathematical function that when given n,
+            a non-negative integer, is defined as
 
-    source = source.replace( /</g , "&lt;");
-    source = source.replace( />/g, "&gt;");
+            n * (n - 1) * (n - 2) * ... * (n - [n + 1])
+            
+            and is often denoted as <code>n!</code>
+            
+ Factorial can be defined easily using either a loop
+ or 'recursively' (a function that calls itself).
+ ******************************************************/
+
+function factorial_loop(num) {
+    // begin with the multiplicitive identity
+    var result = 1;
     
-    for(key_idx in Object.keys(lenses)) {
-      var key = Object.keys(lenses)[key_idx];
-      el = document.getElementById(key);
-      result = source.replace( lenses[key], "<span class='important'>$&</span>");
-      //result = result.replace( /~</g , "&lt;");
-      //result = result.replace( />~/g, "&gt;");
-      el.innerHTML = result;
+    // work from num down to 1 accumulating partial results
+    for (var n = num; n > 1; n--) {
+        result = result * n;
+    }
+    
+    return(result);
+}
+
+function factorial_recursive(num) {
+    if (num < 1 || num == 1) { // TODO: simplify using <=
+        // recursive base case, which ends the recursion
+        return(1);
+    } else {
+        // recursive general case, which reduces
+        // the input toward the base case
+        return (num * factorial_recursive(num - 1));
     }
 
-  }
+}
 
-if (x <= 4) 
-
-x || 3
-3 && 2
-(!x < 10 && y > 1)
-(x < 10 || y == 1) </textarea>
+function test_both_methods_return_same_value() {
+    // See http://www.2ality.com/2014/05/is-integer.html for posible failures
+    // JavaScript doesn't represent perfect "integers"
+    for(var i = 0; i <= 100; i++) {
+        console.log(i);
+        console.log(factorial_loop(i) == factorial_recursive(i));
+    }
+}
+</textarea>
         </form>
       </td>
       <td id="lens_panel">
