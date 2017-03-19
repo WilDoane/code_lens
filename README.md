@@ -2,7 +2,7 @@
 A simple, locally loaded webpage to highlight sources of frequent coding issues in JavaScript. code_lens is a self contained HTML page using simple JavaScript and CSS. You can use it while you're offline and without worrying that your source code is being submitted to some unknown server.
 
 # Purpose
-Programmers-- especially novices-- struggle with syntax and style issues where often a single missing semicolon causes code to fail.
+Programmers-- especially novices-- struggle with syntax and style issues where often a single missing semicolon can cause code execution to fail-- sometimes with no error message generated.
 
 code_lens is designed to reduce the extraneous cognitive load (http://www.instructionaldesign.org/theories/cognitive-load.html) associated with looking at your source code in order to draw your attention to sources of frequent errors. All characters other than those of immediate interest are greyed out.
 
