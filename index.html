@@ -128,7 +128,16 @@
   
   function switchLens(target){
     hideLenses();
-    var selected_lens = target.srcElement.options[target.srcElement.selectedIndex].value;
+    
+    var el;
+    
+    if (target.srcElement) {
+      el = target.srcElement;
+    } else if (target.target) {
+      el = target.target;
+    }
+    
+    var selected_lens = el.options[el.selectedIndex].value;
     document.getElementById(selected_lens).style.display = "block";
     
     document.getElementById("instructions").innerHTML = lenses[selected_lens][1];
@@ -190,7 +199,7 @@
  ******************************************************/
 
 function factorial_loop(num) {
-    // begin with the multiplicitive identity
+    // begin with the multiplicative identity
     var result = 1;
     
     // work from num down to 1 accumulating partial results
@@ -214,7 +223,7 @@ function factorial_recursive(num) {
 }
 
 function test_both_methods_return_same_value() {
-    // See http://www.2ality.com/2014/05/is-integer.html for posible failures
+    // See http://www.2ality.com/2014/05/is-integer.html for possible failures
     // JavaScript doesn't represent perfect "integers"
     for(var i = 0; i <= 100; i++) {
         console.log(i);
